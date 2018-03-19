@@ -1,14 +1,18 @@
 //Programmation: Nathan Cyr et Michel Schreyer
 
-package Partie_2;
+package Partie_3;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
 public class Main {
@@ -16,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		final String fichier = "listeCommandes.txt";
-
+		DecimalFormat df = new DecimalFormat("#.##");
 		BufferedReader BufferFic = null;
 		FileReader LectureFic = null;
 		String Ligne;
@@ -67,10 +71,15 @@ public class Main {
 
 		PrintWriter writer;
 		try {
-
-			writer = new PrintWriter("Facture.txt", "UTF-8");
+			GregorianCalendar gc = new GregorianCalendar();
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+			String dateString = dateFormat1.format(gc.getTime());
+			File file = new File ("Facture-du" + dateString + ".txt");
+			writer = new PrintWriter(file, "UTF-8");
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
+			System.out.println("Bienvenue chez Barette!");
+			System.out.println("Factures:");
 
 			for (String client : clients) {
 				double total = 0;
@@ -79,11 +88,14 @@ public class Main {
 
 					if (commandes.getClient().equals(client)) {
 						total += commandes.getQuantiteCommander() * commandes.getPlat().getPrix();
-						
+						System.out.println(client + " " + df.format(total) + "$");
 					}
+						
 				}
+				
+					
 
-				writer.println(client + " " + total + "$");
+				writer.println(client + " " + df.format(total) + "$");	
 			}
 
 			writer.close();
