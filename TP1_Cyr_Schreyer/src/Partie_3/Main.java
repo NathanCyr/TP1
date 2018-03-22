@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
@@ -17,8 +16,10 @@ import java.util.Hashtable;
 
 public class Main {
 
-	public static void main(String[] args) {
+	private static double TPS = 1.05;
+	private static double TVQ = 1.10;
 
+	public static void main(String[] args) {
 		final String fichier = "listeCommandes.txt";
 		DecimalFormat df = new DecimalFormat("#.##");
 		BufferedReader BufferFic = null;
@@ -71,31 +72,31 @@ public class Main {
 
 		PrintWriter writer;
 		try {
-			GregorianCalendar gc = new GregorianCalendar();
-			SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
-			String dateString = dateFormat1.format(gc.getTime());
+			String dateString = date();
 			File file = new File ("Facture-du" + dateString + ".txt");
 			writer = new PrintWriter(file, "UTF-8");
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
 			System.out.println("Bienvenue chez Barette!");
 			System.out.println("Factures:");
-
+			
 			for (String client : clients) {
 				double total = 0;
 
 				for (Commande commandes : commande) {
 
 					if (commandes.getClient().equals(client)) {
-						total += commandes.getQuantiteCommander() * commandes.getPlat().getPrix();
-						System.out.println(client + " " + df.format(total) + "$");
+						total += commandes.getQuantiteCommander() * commandes.getPlat().getPrix() * TPS * TVQ;
 					}
-						
 				}
 				
+				if (total != 0) {
+					writer.println(client + " " + df.format(total) + "$");	
+					System.out.println(client + " " + df.format(total) + "$");
+				}else{
+					writer.print("");
 					
-
-				writer.println(client + " " + df.format(total) + "$");	
+				}
 			}
 
 			writer.close();
@@ -105,5 +106,13 @@ public class Main {
 			e.printStackTrace();
 		}
 
+	}
+
+
+	public static String date() {
+		GregorianCalendar gc = new GregorianCalendar();
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+		String dateString = dateFormat1.format(gc.getTime());
+		return dateString;
 	}
 }

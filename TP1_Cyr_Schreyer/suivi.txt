@@ -2,7 +2,7 @@ Nathan:
 Créer fichier de suivi
 Faire les spécifications
 Créer 3 tests unitaires ou plus
-Écrire dns le terminal et dans le fichier à la sortie
+Écrire dans le terminal et dans le fichier à la sortie
 Fichier avec les commandes incorrectes
 
 Michel:
