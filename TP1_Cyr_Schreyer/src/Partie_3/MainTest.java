@@ -29,5 +29,11 @@ public class MainTest {
 		double tvq = 1.10;
 		assertEquals(tvq, Main.TVQ, 0);
 	}
+	
+	@Test 
+	public void nomFichierTest() {
+		String fichierTest = "listeCommandes.txt";
+		fichierTest.equals(Main.fichier);
+	}
 
 }

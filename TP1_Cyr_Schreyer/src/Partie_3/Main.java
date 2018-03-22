@@ -18,9 +18,10 @@ public class Main {
 
 	public static double TPS = 1.05;
 	public static double TVQ = 1.10;
-
+	public static String fichier = "listeCommandes.txt";
+	
 	public static void main(String[] args) {
-		final String fichier = "listeCommandes.txt";
+		
 		DecimalFormat df = new DecimalFormat("#.##");
 		BufferedReader BufferFic = null;
 		FileReader LectureFic = null;
