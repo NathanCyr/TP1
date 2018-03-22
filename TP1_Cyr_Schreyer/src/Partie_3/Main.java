@@ -73,13 +73,13 @@ public class Main {
 		PrintWriter writer;
 		try {
 			String dateString = date();
-			File file = new File ("Facture-du" + dateString + ".txt");
+			File file = new File("Facture-du" + dateString + ".txt");
 			writer = new PrintWriter(file, "UTF-8");
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
 			System.out.println("Bienvenue chez Barette!");
 			System.out.println("Factures:");
-			
+
 			for (String client : clients) {
 				double total = 0;
 
@@ -89,14 +89,15 @@ public class Main {
 						total += commandes.getQuantiteCommander() * commandes.getPlat().getPrix() * TPS * TVQ;
 					}
 				}
-				
+
 				if (total != 0) {
-					writer.println(client + " " + df.format(total) + "$");	
-					System.out.println(client + " " + df.format(total) + "$");
-				}else{
+					writer.println(client + " " + df.format(total) + "$");
+
+				} else {
 					writer.print("");
-					
+
 				}
+				System.out.println(client + " " + df.format(total) + "$");
 			}
 
 			writer.close();
@@ -107,7 +108,6 @@ public class Main {
 		}
 
 	}
-
 
 	public static String date() {
 		GregorianCalendar gc = new GregorianCalendar();
