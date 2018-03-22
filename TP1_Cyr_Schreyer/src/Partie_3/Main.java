@@ -16,8 +16,8 @@ import java.util.Hashtable;
 
 public class Main {
 
-	private static double TPS = 1.05;
-	private static double TVQ = 1.10;
+	public static double TPS = 1.05;
+	public static double TVQ = 1.10;
 
 	public static void main(String[] args) {
 		final String fichier = "listeCommandes.txt";

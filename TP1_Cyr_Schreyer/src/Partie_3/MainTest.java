@@ -22,6 +22,12 @@ public class MainTest {
 		dateStringTest.equals(Main.date());
 		
 	}
+	
+	@Test
+	public void tpsTest() {
+		double tps = 1.05;
+		assertEquals(tps, Main.TPS, 0);
+	}
 
 	
 
